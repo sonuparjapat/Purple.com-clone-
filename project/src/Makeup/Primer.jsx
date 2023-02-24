@@ -1,11 +1,12 @@
+
 import React from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import {Box,Image,Heading} from "@chakra-ui/react"
-import FourthSlide from './FourthSlide';
-import Step4 from './Step4';
-import Forslideruse from './ForSlider';
+import {Box,Image} from "@chakra-ui/react"
+import WithSubnavigation from '../Navbar';
+import Carousel from '../slide';
+import PrimerCarosal from './PrimerCarosal';
 const images=[
     {image:"https://media6.ppl-media.com/tr:w-512,ar-583-714,c-at_max,pr-true,dpr-2,f-gif/mediafiles/ecomm/misc/1677076373_min-30-live.gif"},
     {image:"https://media6.ppl-media.com/tr:w-512,ar-583-714,c-at_max,pr-true,dpr-2,f-gif/mediafiles/ecomm/misc/1677076364_125-live.gif"},
@@ -17,7 +18,7 @@ const images=[
 
         
     ]
-const ThirdSlide = () => {
+const Primer = () => {
   const settings = {
     dots: true,
     infinite: true,
@@ -29,22 +30,19 @@ const ThirdSlide = () => {
 
   return (
     <Box>
-    <Box ml={{base:"3px",md:"10px",xl:"55px"}} mt={7}>
-    <Slider {...settings}>
-      {images.map((item, index) => (
-        <div  key={index}>
-          <Image height="300px" src={item.image} alt={`Slide ${index + 1}`} />
-        </div>
-      ))}
-    </Slider>
-    </Box>
-
-    {/* <FourthSlide/> */}
-    <Step4/>
-    
-  
-    </Box>
-  );
+    <WithSubnavigation/>
+   <PrimerCarosal/>
+</Box>
+    // <Box ml={{base:"3px",md:"10px",xl:"55px"}} mt={7}>
+    // <Slider {...settings}>
+    //   {images.map((item, index) => (
+    //     <div  key={index}>
+    //       <Image height="300px" src={item.image} alt={`Slide ${index + 1}`} />
+    //     </div>
+    //   ))}
+    // </Slider>
+    // </Box></Box>
+    );
 };
 
-export default ThirdSlide;
+export default Primer;

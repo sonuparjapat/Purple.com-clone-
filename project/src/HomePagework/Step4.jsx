@@ -1,12 +1,14 @@
 
 import {Grid,GridItem,Image,Box} from "@chakra-ui/react"
 import FourthSlide from "./FourthSlide"
-import ProductAddToCart from "./Featured"
+import ProductAddToCart from "./ProductAddToCart"
 import Category from "./Category"
 import Step5 from "./step5"
 import Step6 from "./Step6"
 import JustArrived from "./JustArrived"
 import Step7 from "./Step7"
+import BeautyBrand from "./BeautyBrand"
+import LargeWithAppLinksAndSocial from "./Footer"
 const images=[
     "https://media6.ppl-media.com/tr:dpr-2/mediafiles/ecomm/misc/1677057195_ny-celebs_pb-36-pan-eyeshadow-299-.gif?tr=f-gif",
     "https://media6.ppl-media.com/tr:dpr-2/mediafiles/ecomm/misc/1677072852_sugar-1440x700-3.jpeg",
@@ -32,14 +34,15 @@ export default function Step4(){
 <Image src={item} />
 </GridItem>)}
 </Grid>
-<Box>
+<Box >
     <Image mt="24px" src="https://media6.ppl-media.com/tr:w-1280,c-at_max,pr-true,dpr-2/mediafiles/ecomm/misc/1676988831_flash-web.jpg"/>
 </Box>
-<Category/>
+{/* <Category/> */}
 {/* <Step5/> */}
-<Step6/>
-<Step7/>
-<JustArrived/>
+{/* <Step6/> */}
+{/* <Step7/> */}
+{/* <JustArrived/> */}
+
 
 </div>
     )

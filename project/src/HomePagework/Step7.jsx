@@ -1,7 +1,7 @@
 
 import {Grid,GridItem,Image,Box} from "@chakra-ui/react"
 import FourthSlide from "./FourthSlide"
-import ProductAddToCart from "./Featured"
+import ProductAddToCart from "./ProductAddToCart"
 import Category from "./Category"
 import Step5 from "./step5"
 import Step6 from "./Step6"
@@ -31,8 +31,8 @@ export default function Step7(){
 <Image src={item} />
 </GridItem>)}
 </Grid>
-<Box>
-    <Image mt="24px" src="https://media6.ppl-media.com/tr:w-1280,c-at_max,pr-true,dpr-2/mediafiles/ecomm/misc/1676988831_flash-web.jpg"/>
+<Box >
+    <Image  mt="24px" src="https://media6.ppl-media.com/tr:w-1280,c-at_max,pr-true,dpr-2/mediafiles/ecomm/misc/1676988831_flash-web.jpg"/>
 </Box>
 
 

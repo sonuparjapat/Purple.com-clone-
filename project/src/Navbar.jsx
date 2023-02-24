@@ -32,10 +32,13 @@ import {
 
 
   } from '@chakra-ui/icons';
-  
+import { useState } from "react";
+  import { useContext } from "react";
+  import { Authcontext } from "./AuthProvider.jsx/AuthProvider";
   export default function WithSubnavigation() {
     const { isOpen, onToggle } = useDisclosure();
-  
+
+  const{username,arrangeusername}=useContext(Authcontext)
     return (
       <Box>
         <Flex
@@ -80,23 +83,24 @@ import {
      
 
           </Flex>
-          <Box display="flex" marginLeft={{base:"5px"}} w={{base:"50%",md:"20%",lg:"43%"}}>
+          <Box  mr={{base:"20px",md:"20px",lg:"50"}} display="flex" marginLeft={{base:"5px"}} w={{base:"50%",md:"20%",lg:"33%"}}>
             <Box  w={{md:"95%"}} >
        
           <Input  marginRight="30px" variant='outline' placeholder='Search Items' w="99%"/></Box><Box><Button  opacity="0.5"><FontAwesomeIcon icon={faSearch} /></Button></Box>  </Box>
           
-          <Box w={{base:"20%",md:"9%",lg:"10%"}} ml={4}  display="flex" justifyContent="space-between">
+          <Box w={{base:"40%",md:"9%",lg:"15%"}} ml={4}  display="flex" justifyContent="space-between">
             
-<Link to="/login" style={{marginTop:"10px"}}><FontAwesomeIcon icon={faSignIn} /></Link>
+<Link to="/signup" style={{marginTop:"10px"}}><FontAwesomeIcon icon={faSignIn} /></Link>
     <Link to="/cart" style={{marginTop:"10px"}}><FontAwesomeIcon icon={faCartArrowDown} /></Link>
-    <Link to="/favourate" style={{marginTop:"10px"}}><FontAwesomeIcon icon={faSmile} /></Link>
+    {/* <Link to="/favourate" style={{marginTop:"10px"}}><FontAwesomeIcon icon={faSmile} /></Link> */}
+    <Box borderRadius={5} bg="grey"><p style={{marginTop:"5px",color:"white"}}>Hi:{username?username:""}</p></Box>
   </Box>
         </Flex>
   
         <Collapse in={isOpen} animateOpacity>
           <MobileNav />
         </Collapse>
-        <Carousel/>
+        {/* <Carousel/> */}
       </Box>
     
     );
@@ -115,7 +119,7 @@ import {
               <PopoverTrigger>
                 <Link
                   p={2}
-                  href={navItem.href ?? '#'}
+                 to={navItem.href}
                   fontSize={'sm'}
                   fontWeight={500}
                   color={linkColor}
@@ -152,7 +156,7 @@ import {
   const DesktopSubNav = ({ label, href, subLabel }) => {
     return (
       <Link
-        href={href}
+        to={href}
         role={'group'}
         display={'block'}
         p={2}
@@ -204,7 +208,7 @@ import {
         <Flex
           py={2}
           as={Link}
-          href={href ?? '#'}
+          href={href ?? "/primer"}
           justify={'space-between'}
           align={'center'}
           _hover={{
@@ -251,41 +255,41 @@ import {
   
   const NAV_ITEMS = [
     {
-      label: 'Inspiration',
+      label: 'Make Up',
       children: [
         {
-          label: 'Explore Design Work',
-          subLabel: 'Trending Design to inspire you',
-          href: '#',
+          label: 'Primer',
+         subLabel:"Gives you a Cassic look",
+          href: '/primer',
         },
         {
-          label: 'New & Noteworthy',
-          subLabel: 'Up-and-coming Designers',
-          href: '#',
+          label: 'Concealer',
+          subLabel: 'Try this once',
+          href: '/concealer',
         },
       ],
     },
     {
-      label: 'Find Work',
+      label: 'Skin Care',
       children: [
         {
-          label: 'Job Board',
-          subLabel: 'Find your dream design job',
-          href: '#',
+          label: 'Face Wash',
+          subLabel: 'Get a Glow',
+          href: '/facewash',
         },
         {
-          label: 'Freelance Projects',
-          subLabel: 'An exclusive list for contract work',
-          href: '#',
+          label: 'Cleanser',
+          subLabel: 'Make your skin happy',
+          href: '/cleanser',
         },
       ],
     },
     {
-      label: 'Learn Design',
-      href: '#',
+      label: 'Personal Care',
+      href: '/personalcare',
     },
     {
-      label: 'Hire Designers',
-      href: '#',
+      label: 'Men',
+      href: '/men',
     },
   ];

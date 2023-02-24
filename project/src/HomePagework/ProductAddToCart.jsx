@@ -14,7 +14,9 @@ import {
   } from '@chakra-ui/react';
   import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
   import { FiShoppingCart } from 'react-icons/fi';
-  
+import Slider2 from './secondslide';
+  import { Authcontext } from '../AuthProvider.jsx/AuthProvider';
+  import { useContext } from 'react';
   const ourdata = [{
     isNew: true,
     imageURL:
@@ -93,6 +95,8 @@ import {
   }
   
   function ProductAddToCart() {
+    const{username,arrangeusername}=useContext(Authcontext)
+    console.log(username)
     return (
         <div>
         <Heading as='h4' size='md' ml={4}>Featured</Heading>
@@ -170,6 +174,7 @@ import {
         )}
         
       </Grid>
+      {/* <Slider2/> */}
       </div>
     );
   }

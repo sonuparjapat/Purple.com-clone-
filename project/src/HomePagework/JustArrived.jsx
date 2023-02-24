@@ -18,7 +18,7 @@ import {
   const ourdata = [{
     isNew: true,
     imageURL:
-      'https://media6.ppl-media.com/tr:h-250,w-250,c-at_max,oi-AD_35x235_small_kJWM53nMn1.png,ow-60,ofo-top_right,dpr-2/static/img/product/275402/alps-goodness-tea-tree-oil-hyaluronic-acid-and-ketoconazole-anti-dandruff-scalp-serum-for-oily-scalp-30-ml-85_1_display_1663332851_7f1da563.jpg',
+      'https://media6.ppl-media.com/tr:h-250,w-250,c-at_max/static/img/product/278196/ny-bae-loose-glitter-eyeshadow-diamond-red-14-2-g_6_display_1670391161_38f53279.jpg',
     name: 'Wayfarer Classic',
     price: "259",
     rating: 4.2,
@@ -27,7 +27,7 @@ import {
   {
     isNew: true,
     imageURL:
-      'https://media6.ppl-media.com/tr:h-250,w-250,c-at_max,oi-AD_35x235_small_kJWM53nMn1.png,ow-60,ofo-top_right,dpr-2/static/img/product/335205/minimalist-8-percentage-glycolic-acid-face-toner-in-free-acid-form-with-bamboo-water-for-exfoliating-and-smoothening-skin_1_display_1667318344_d51d1f44.jpg',
+      'https://media6.ppl-media.com/tr:h-250,w-250,c-at_max/static/img/product/300648/alps-goodness-glow-with-papaya-vitamin-c-and-ahas-night-cream-50g_13_display_1667478351_cf612032.jpg',
     name: 'Wayfarer Classic',
     price: "150",
     rating: 4.2,
@@ -36,7 +36,7 @@ import {
   {
     isNew: true,
     imageURL:
-      'https://media6.ppl-media.com/tr:h-250,w-250,c-at_max,oi-AD_35x235_small_kJWM53nMn1.png,ow-60,ofo-top_right,dpr-2/static/img/product/275756/good-vibes-sunscreen-spf-50-20_1_display_1657774664_528b829e.jpg',
+      'https://media6.ppl-media.com/tr:h-250,w-250,c-at_max/static/img/product/324200/faces-canada-comfy-matte-crayon-i-creamy-matte-i-chamomile-and-shea-butter-i-alcohol-free-i-on-fleek-06-2-8g_5_display_1672660038_e666f173.jpg',
     name: 'Wayfarer Classic',
     price:"170",
     rating: 4.2,
@@ -45,7 +45,7 @@ import {
   {
     isNew: true,
     imageURL:
-      'https://media6.ppl-media.com/tr:h-250,w-250,c-at_max,oi-AD_35x235_small_kJWM53nMn1.png,ow-60,ofo-top_right,dpr-2/static/img/product/275249/good-vibes-tea-tree-skin-cleansing-toner-120-ml-2-19-63_1_display_1656402027_acd2f1d2.jpg',
+      'https://media6.ppl-media.com/tr:h-250,w-250,c-at_max/static/img/product/315293/faces-canada-ultime-pro-splash-nail-enamel-rustini-60_7_display_1662449038_c207a8f0.jpg',
     name: 'Wayfarer Classic',
     price: "400",
     rating: 4.2,
@@ -53,7 +53,7 @@ import {
   },
   {
     isNew: true,
-    imageURL:"https://media6.ppl-media.com/tr:h-250,w-250,c-at_max,oi-AD_35x235_small_kJWM53nMn1.png,ow-60,ofo-top_right,dpr-2/static/img/product/329815/alps-goodness-rose-and-squalane-hydrating-gel-body-lotion-300ml-best-body-lotion-for-summer-lightweight-sulphates-free-paraben-free-and-cruelty-free-vegan-1_1_display_1664277617_029a49b8.jpg",
+    imageURL:"https://media6.ppl-media.com/tr:h-250,w-250,c-at_max/static/img/product/284118/ny-bae-twin-hues-makeup-pouch-rosewood-01_3_display_1673505414_ac8d5ff1.jpg",
     name: 'Wayfarer Classic',
     price: "300",
     rating: 4.2,

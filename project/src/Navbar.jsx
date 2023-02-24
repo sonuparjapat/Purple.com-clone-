@@ -1,4 +1,5 @@
 import logo from "./myimg/shineugif.gif";
+import Carousel from "./slide";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import { Link } from "react-router-dom";
 import { faArrowRightToBracket, faCartArrowDown, faColonSign, faHome, faLongArrowLeft, faSearch, faSign, faSignIn, faSmile } from "@fortawesome/free-solid-svg-icons";
@@ -79,12 +80,13 @@ import {
      
 
           </Flex>
-          <Box display="flex" w="45%">
-            <Box width="90%">
+          <Box display="flex" marginLeft={{base:"5px"}} w={{base:"50%",md:"20%",lg:"43%"}}>
+            <Box  w={{md:"95%"}} >
        
-          <Input marginRight="30px" variant='outline' placeholder='Search Items'  w="100%"/></Box><Box><Button  opacity="0.5"><FontAwesomeIcon icon={faSearch} /></Button></Box>  </Box>
+          <Input  marginRight="30px" variant='outline' placeholder='Search Items' w="99%"/></Box><Box><Button  opacity="0.5"><FontAwesomeIcon icon={faSearch} /></Button></Box>  </Box>
           
-          <Box ml={4} w="15%"  display="flex" justifyContent="space-between">
+          <Box w={{base:"20%",md:"9%",lg:"10%"}} ml={4}  display="flex" justifyContent="space-between">
+            
 <Link to="/login" style={{marginTop:"10px"}}><FontAwesomeIcon icon={faSignIn} /></Link>
     <Link to="/cart" style={{marginTop:"10px"}}><FontAwesomeIcon icon={faCartArrowDown} /></Link>
     <Link to="/favourate" style={{marginTop:"10px"}}><FontAwesomeIcon icon={faSmile} /></Link>
@@ -94,7 +96,9 @@ import {
         <Collapse in={isOpen} animateOpacity>
           <MobileNav />
         </Collapse>
+        <Carousel/>
       </Box>
+    
     );
   }
   
@@ -104,7 +108,7 @@ import {
     const popoverContentBgColor = useColorModeValue('white', 'gray.800');
   
     return (
-      <Stack direction={'row'} spacing={4}>
+      <Stack mt="10px"direction={'row'} spacing={4}>
         {NAV_ITEMS.map((navItem) => (
           <Box key={navItem.label}>
             <Popover trigger={'hover'} placement={'bottom-start'}>
@@ -239,6 +243,7 @@ import {
           </Stack>
         </Collapse>
       </Stack>
+      
     );
   };
   

@@ -23,7 +23,7 @@ export default function Main(){
 <FourthSlide/>
 <Step4/>
 <Category/>
-<Step5/>
+{/* <Step5/> */}
 <Step6/>
 <Step7/>
 <JustArrived/>

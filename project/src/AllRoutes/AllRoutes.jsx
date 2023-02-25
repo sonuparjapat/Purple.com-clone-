@@ -4,6 +4,7 @@ import WithSubnavigation from "../Navbar"
 import Login from "../LoginLogout/Login"
 import Primer from "../Makeup/Primer"
 import Main from "../HomePagework/Main"
+import SinglePrimer from "../Makeup/SinglePrimer"
 export default function AllRoutes(){
     return (
         <>
@@ -12,6 +13,7 @@ export default function AllRoutes(){
     <Route path="/signup" element={<Signup/>}></Route>
     <Route path="/login" element={<Login/>}></Route>
     <Route path="/primer" element={<Primer/>}></Route>
+    <Route path="/primer/:id" element={<SinglePrimer/>}></Route>
    
 </Routes>
  </>

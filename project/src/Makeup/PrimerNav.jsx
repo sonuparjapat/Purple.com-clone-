@@ -32,17 +32,13 @@ import {
 
 
   } from '@chakra-ui/icons';
-
-
 import { useState } from "react";
   import { useContext } from "react";
   import { Authcontext } from "./AuthProvider.jsx/AuthProvider";
-  export default function WithSubnavigation() {
+  export default function PrimerNav() {
     const { isOpen, onToggle } = useDisclosure();
 
-  const{username,arrangeusername,inputvalue,ourinput}=useContext(Authcontext)
-  // const{inputvalue}=useContext(Authcontext)
-  console.log(ourinput) 
+  const{username,arrangeusername}=useContext(Authcontext)
     return (
       <Box>
         <Flex
@@ -90,7 +86,7 @@ import { useState } from "react";
           <Box  mr={{base:"20px",md:"20px",lg:"50"}} display="flex" marginLeft={{base:"5px"}} w={{base:"50%",md:"20%",lg:"33%"}}>
             <Box  w={{md:"95%"}} >
        
-          <Input onChange={(e)=>inputvalue(e.target.value)} marginRight="30px" variant='outline' placeholder='Search Items' w="99%"/></Box><Box><Button  opacity="0.5"><FontAwesomeIcon icon={faSearch} /></Button></Box>  </Box>
+          <Input  marginRight="30px" variant='outline' placeholder='Search Items' w="99%"/></Box><Box><Button  opacity="0.5"><FontAwesomeIcon icon={faSearch} /></Button></Box>  </Box>
           
           <Box w={{base:"40%",md:"9%",lg:"15%"}} ml={4}  display="flex" justifyContent="space-between">
             

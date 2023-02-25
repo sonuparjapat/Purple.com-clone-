@@ -128,7 +128,7 @@ key={index}
     <Image src="https://media6.ppl-media.com/tr:w-1280,c-at_max,pr-true,dpr-2/mediafiles/ecomm/misc/1676907448_unmissable-_web.jpg"/>
 
 </Box>
-  <ThirdSlide/>
+  {/* <ThirdSlide/> */}
     </Box>
 
 

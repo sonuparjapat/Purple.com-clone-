@@ -1,4 +1,4 @@
-
+import { IconName } from "react-icons/sl";
 import logo from "../myimg/shineugif.gif"
 import {
     Box,

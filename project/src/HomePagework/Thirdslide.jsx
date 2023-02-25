@@ -40,7 +40,7 @@ const ThirdSlide = () => {
     </Box>
 
     {/* <FourthSlide/> */}
-    <Step4/>
+    {/* <Step4/> */}
     
   
     </Box>

@@ -11,72 +11,53 @@ import {
     Heading,
     Text,
     useColorModeValue,
+    Toast,
+    useToast,
+    Spinner,
 
   } from '@chakra-ui/react';
   import { useNavigate } from 'react-router-dom';
   import { useReducer, useState } from 'react';
 import axios from 'axios';
-
+import { useLocation } from 'react-router-dom';
 
 import { useContext } from 'react';
 import { Authcontext } from '../AuthProvider.jsx/AuthProvider';
 import Logout from './Logout';
+import { signinfailed, signinsucccess, usersignin } from '../Reducer/Login/action';
+import { useDispatch,useSelector } from 'react-redux';
 const initdata={
 "email":"",
 "password":"",
 
 }
-const reducer=(state,action)=>{
-  const{type,payload}=action
-  switch(type){
-    case "email":{
-      state={...state,email:payload}
-      return state
-    }
-    case "password":{
-      state={...state,password:payload}
-    }
-    default:{
-      return state
-    }
-  }
-}
+
   export default function Login() {
-    const [state,dispatch]=useReducer(reducer,initdata)
-const[isLoading,setIsloading]=useState(false)
-const[isError,setIsError]=useState(false)
-const[token,setToken]=useState("")
-const navigate=useNavigate();
-const{arrangeusername}=useContext(Authcontext)
-
-console.log(state)
-const loginuser=()=>{
-  if(state.email&&state.password){
-
-  
-  setIsloading(true)
-  axios({
-    method:"Post",
-    url:"https://reqres.in/api/login",
-    data:{
-      email:`${state.email}`,
-      password:`${state.password}`
-    }
-  }).then((res)=>{
-   
-    setIsloading(false)
-    alert("Login Successfully")
-    navigate("/")
-  setToken(res.data.token)}).catch((error)=>{
-    setIsError(true)
-    setIsloading(false)
-    alert("Wrong Credentials")
-  })}
-  else{
-    alert("Please Fill All The Details")
-  }
+  const [login,setLogin]=useState(initdata)
+  const dispatch=useDispatch()
+  const selector=useSelector((state)=>state.loginreducer)
+  const {isLoading,isError}=selector
+  const toast=useToast()
+const handlechange=(e)=>{
+  const {name,value}=e.target
+  setLogin((pre)=>({...pre,[name]:value}))
 }
-
+const navigate=useNavigate()
+const location=useLocation()
+const handlesubmit=(e)=>{
+  e.preventDefault()
+dispatch(usersignin(login)).then((res)=>{
+  dispatch(signinsucccess())
+  localStorage.setItem("usertoken",res.data.token)
+  
+  toast({"description":res.data.msg,"position":"top","status":"success"})
+  navigate(location.state,{replace:true})
+}).catch((err)=>{
+  dispatch(signinfailed())
+toast({"description":err.response.data.msg,"position":"top","status":"error"})
+})
+}
+// console.log(login)
     return (
       <Flex
         minH={'100vh'}
@@ -95,29 +76,38 @@ const loginuser=()=>{
             bg={useColorModeValue('white', 'gray.700')}
             boxShadow={'lg'}
             p={8}>
+          
             <Stack spacing={4}>
-              <FormControl id="email">
+            <form onSubmit={handlesubmit}>
+              <FormControl isRequired>
                 <FormLabel>Email address</FormLabel>
-                <Input onChange={(e)=>dispatch({type:"email",payload:e.target.value})} type="email" />
+                <Input name="email" onChange={handlechange} type="email" />
               </FormControl>
-              <FormControl id="password">
+              <FormControl isRequired>
                 <FormLabel>Password</FormLabel>
-                <Input onChange={(e)=>dispatch({type:"password",payload:e.target.value})} type="password" />
+                <Input name="password" onChange={handlechange} type="password" />
               </FormControl>
               <Stack spacing={10}>
-                {/* <Stack
-                  direction={{ base: 'column', sm: 'row' }}
-                  align={'start'}
-                  justify={'space-between'}>
-                  <Checkbox>Remember me</Checkbox>
-                  <Link color={'blue.400'}>Forgot password?</Link>
-                </Stack> */}
+              
 
-{isLoading?
-                <Button
-                isLoading colorScheme='teal' variant='solid'
+
+              {isLoading==true?
+              
+              <Button 
+              // isLoading colorScheme='teal' variant='solid'
+        isDisabled
+                size="lg"
+                bg={'blue.400'}
+                color={'white'}
+                _hover={{
+                  bg: 'blue.500',
+                }}>
+               <Spinner/>
+              </Button>
+            
+            :  <Button 
                 // isLoading colorScheme='teal' variant='solid'
-                onClick={loginuser}
+              type="submit"
                   loadingText="Submitting"
                   size="lg"
                   bg={'blue.400'}
@@ -126,28 +116,14 @@ const loginuser=()=>{
                     bg: 'blue.500',
                   }}>
                   Sign up
-                </Button>:
+                </Button>}
                 
-                <Button
-               
-                // isLoading colorScheme='teal' variant='solid'
-                onClick={loginuser}
-                  loadingText="Submitting"
-                  size="lg"
-                  bg={'blue.400'}
-                  color={'white'}
-                  _hover={{
-                    bg: 'blue.500',
-                  }}>
-                 Log In
-                </Button>
-                
-                }
+              
 <Logout/>
 
 
               </Stack>
-            </Stack>
+              </form>   </Stack>
           </Box>
         </Stack>
       </Flex>

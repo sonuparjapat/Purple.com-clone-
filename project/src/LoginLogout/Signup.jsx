@@ -19,6 +19,7 @@ import {
     AlertIcon
  
   } from '@chakra-ui/react';
+  import { useToast } from '@chakra-ui/react';
   import {Link,NavLink,useNavigate} from "react-router-dom"
   import { useEffect, useState } from 'react';
   import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
@@ -27,95 +28,71 @@ import axios from "axios"
 import Alertmessage from './Alert';
 import { Authcontext } from '../AuthProvider.jsx/AuthProvider';
 import { useContext } from 'react';
-  const initdata={
-   email:"",
-   password:"",
-   firstname:"",
-   lastname:"" 
-  }
-  const reducer=(state,action)=>{
-const {type,payload}=action
-switch(type){
-  case "firstname":{
-    state={...state,firstname:payload}
-    return state
-  }
-  case "lastname":{
-    state={...state,lastname:payload}
-    return state
-  }
-  case "Email":{
-    state={...state,email:payload}
-    return state
-  }
-  case "Password":{
-    state={...state,password:payload}
-    return state
-  }
-  default:{
-    return state
-  }
+import { signupfailed, signupsuccess, usersignup } from '../Reducer/signup/Action';
+import { useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { signinfail } from '../Reducer/Login/actionTypes';
+import { signinfailed, signinsucccess } from '../Reducer/Login/action';
+const initdata={
+  "name":"",
+  "email":"",
+  "password":""
 }
-  }
+
   
   export default function Signup() {
-    const [showPassword, setShowPassword] = useState(false);
-  const [state,dispatch]=useReducer(reducer,initdata)
-  const [signup,setSignup]=useState(false)
-  const [login,setLogin]=useState(false)
-  const[isLoading,setIsloading]=useState(false)
-  const[error,setError]=useState(false)
-  const[user,setUsers]=useState("")
-  const[successfulpost,setSuccessfulpost]=useState(false)
-  const{username,arrangeusername,removeusername}=useContext(Authcontext)
-  const navigate=useNavigate()
-  console.log(state)
- 
+   const [signup,setSignup]=useState(initdata)
+const toast=useToast()
+const dispatch=useDispatch()
+const data=useSelector((state)=>state.signupreducer)
+ const {isLoading,isError,isAuth,status}=data
+ console.log(data)
+ const navigate=useNavigate()
+//  console.log(status)
+// console.log(status)
+const handlechange=(e)=>{
+  const {name,value}=e.target
+  setSignup((pre)=>({...pre,[name]:value}))
+}
 
-console.log(user)
-  useEffect(()=>{
-    fetchdata()
-   
-  },[])
-  const fetchdata=()=>{
-     axios.get("https://reqres.in/api/register").then((rex)=>{
-      setUsers(rex.data)
-  })
+// console.log(signup)
+
+const handlesubmit=(e)=>{
+  e.preventDefault()
+  // console.log(signup
+  //   )
+  const {name,email,password}=signup
+  if(name&&email&&password){
+  
+   dispatch(usersignup(signup)).then((res)=>{
+    dispatch(signupsuccess())
+// console.log(res)
+    toast({"description":res.data.msg,"position":"top",status:"success"})
+    navigate("/login")}).catch((err)=>{
+dispatch(signupfailed())
+toast({"description":err.response.data.msg,"position":"top",status:"error"})
+   })
+
+}
+  else {
+   toast({"description":"Please Provide All The Details","position":"top"})
   }
-  console.log(state)
-  const postuserdata=(e)=>{
-    if(state.email&&state.password&&state.firstname&&state.lastname){
-setIsloading(true)
-axios.post("https://reqres.in/api/register",{
-
- 
-  email:  `${state.email}`,
- password:`${state.password}`
-
-    }).then((res)=>{
-setIsloading(false)
-setSuccessfulpost(true)
-alert("SIGNUP SUCCESSFULLY")
-
-navigate("/")
-arrangeusername(`${state.firstname}`)
-      fetchdata()
-      console.log(res)}).catch((error)=>{
-        setError(true)
-        setIsloading(false)
-        Alertmessage("PLEASE FILL THE RIGHT DETAILS")
-        console.log(error)})
-
-}
-else {
- Alertmessage("Please Provide All The Details")
+  // console.log(signup)
 }
 
 
-}
 
+console.log(isLoading)
  
     return (
+
+      <>
+
+      
+      
+      
+      
+    
       <Flex
       minH={'100vh'}
       align={'center'}
@@ -127,7 +104,7 @@ else {
             Sign up
           </Heading>
           <Text fontSize={'lg'} color={'gray.600'}>
-            to enjoy all of our cool features ✌️
+            to enjoy all of our cool products ✌️
           </Text>
         </Stack>
         <Box
@@ -137,60 +114,51 @@ else {
           p={8}>
           <Stack spacing={4}>
             <HStack>
-              <Box>
+              {/* <Box>
                 <FormControl id="firstName" isRequired>
-                  <FormLabel>First Name</FormLabel>
-                  <Input onChange={(e)=>dispatch({type:"firstname",payload:e.target.value})} type="text" />
+                  <FormLabel>Name</FormLabel>
+                  <Input name="name"  onChange={handlechange} type="text" />
                 </FormControl>
-              </Box>
-              <Box>
-                <FormControl id="lastName">
-                  <FormLabel>Last Name</FormLabel>
-                  <Input onChange={(e)=>dispatch({type:"lastname",payload:e.target.value})}type="text" />
-                </FormControl>
-              </Box>
+              </Box> */}
+             
             </HStack>
-          
+            <form onSubmit={handlesubmit}>
+            <FormControl id="name" isRequired>
+                <FormLabel>Name</FormLabel>
+               
+                <Input name="name" onChange={handlechange} type="text" />
+              </FormControl>
               <FormControl id="email" isRequired>
                 <FormLabel>Email address</FormLabel>
-                <Input onChange={(e)=>dispatch({type:"Email",payload:e.target.value})}type="email" />
+               
+                <Input name="email" onChange={handlechange} type="email" />
               </FormControl>
               <FormControl id="password" isRequired>
                 <FormLabel>Password</FormLabel>
-                <InputGroup>
-                  <Input onChange={(e)=>dispatch({type:"Password",payload:e.target.value})} type={showPassword ? 'text' : 'password'} />
-                  <InputRightElement h={'full'}>
-                    <Button
-                      variant={'ghost'}
-                      onClick={() =>
-                        setShowPassword((showPassword) => !showPassword)
-                      }>
-                      {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-                    </Button>
-                  </InputRightElement>
-                </InputGroup>
+               
+                  <Input name="password" onChange={handlechange} type="password" />
+                 
+                
               </FormControl>
               <Stack spacing={10} pt={2}>
-                {isLoading?
-                <Button
-                isLoading colorScheme='teal' variant='solid'
+          
+              {isLoading==true?  <Button
+           
                 // isLoading colorScheme='teal' variant='solid'
-                onClick={postuserdata}
-                  loadingText="Submitting"
+             isDisabled
                   size="lg"
                   bg={'blue.400'}
                   color={'white'}
                   _hover={{
                     bg: 'blue.500',
                   }}>
-                  Sign up
+               <Spinner/>
                 </Button>:
-                
                 <Button
-               
+            
                 // isLoading colorScheme='teal' variant='solid'
-                onClick={postuserdata}
-                  loadingText="Submitting"
+              type="submit"
+                
                   size="lg"
                   bg={'blue.400'}
                   color={'white'}
@@ -199,10 +167,13 @@ else {
                   }}>
                   Sign up
                 </Button>
+  }
                 
-                }
+            
+              
+                
 
-              </Stack>
+              </Stack> </form>
               <Stack pt={6}>
                 <Text align={'center'}>
                   Already a user? <Link to="/login" isActivecolor={'blue.400'}>Login</Link>
@@ -211,6 +182,6 @@ else {
             </Stack>
           </Box>
         </Stack>
-      </Flex>
+      </Flex>  </>
     );
   }

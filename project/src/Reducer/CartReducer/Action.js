@@ -20,7 +20,7 @@ export const usercarddata=(dispatch)=>{
             "Authorization":`Bearer ${usertoken}`
         }
     }).then((res)=>{
-        // console.log(res.data.data)
+        console.log(res.data)
         dispatch(cartdatasuccess(res.data))
     }).catch((err)=>dispatch(cartdatafailure()))
 }

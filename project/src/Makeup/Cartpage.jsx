@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import WithSubnavigation from '../Navbar'
+import WithSubnavigation from './Navbar'
 import LargeWithLogoCentered from '../HomePagework/Footer'
 import {Box,Heading,Image,Select,Button,Spacer,space, Spinner} from "@chakra-ui/react"
 import { Link } from 'react-router-dom'
@@ -9,6 +9,8 @@ import {TfiFaceSad} from "react-icons/tfi"
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { usercarddata } from '../Reducer/CartReducer/Action'
+import { deletedata, deletefailure, deletesuccess } from '../Reducer/Deletesingleproduct/Action'
+import { updatedata } from '../Reducer/Updatequantity/Action'
 
 const theme={
   color:"rgb(44,65,76)",
@@ -35,18 +37,42 @@ const data1={
 export default function Cartpage() {
 const [cartdata,setCartdata]=useState(data1)
 const [shippingcharge,setShippingcharges]=useState(50)
+const [state,setState]=useState(false)
 const dispatch=useDispatch()
 const cart=useSelector((state)=>state.cartdatareducer)
 
 useEffect(()=>{
 dispatch(usercarddata)
-},[])
+},[state])
 const {isLoading,isError,data,sum,sumafterdiscount,savings}=cart
-useEffect(()=>{
-  setCartdata(data)
-},[])
+// useEffect(()=>{
+//   setCartdata(data)
+// },[])
 
-console.log(savings)
+const handleclick=(id)=>{
+dispatch(deletedata(id)).then((res)=>{
+  console.log(res)
+
+  dispatch(deletesuccess())
+  setState(!state)
+ 
+}).catch((err)=>{
+  dispatch(deletefailure())
+
+})
+}
+// >>>>>>>>>>>>>>>>>>>>>>>>handlingquatityhere>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+const handlequantity=(e,id)=>{
+let value=e.target.value
+// console.log(value,id)
+dispatch(updatedata(value,id))
+setTimeout(()=>{
+  setState(!state)
+},1000)
+
+
+}
+// console.log(savings)
 
  
   return (
@@ -65,9 +91,9 @@ console.log(savings)
 <Box mt="60px" height={"480px"} overflow={"scroll"}  top={1} width="100%" >
   {isLoading?<Spinner/>:
   <>
-{typeof data!=="undefined"&&data.length>0?
-data.map((item)=>
-<Box width="95%" borderRadius={"10px"} shadow={" rgba(149, 157, 165, 0.2) 0px 8px 24px"}  display="flex" justifyContent={"space-around"} marginTop="40px" >
+{typeof data!=="undefined"&&data.length>=1?
+data.map((item,index)=>
+<Box width="95%" key={index} borderRadius={"10px"} shadow={" rgba(149, 157, 165, 0.2) 0px 8px 24px"}  display="flex" justifyContent={"space-around"} marginTop="40px" >
 
 
 
@@ -83,7 +109,7 @@ _hover={{transform:"scale(0.8)"}} borderRadius={"10px"} width="90%" height={"90%
 <Box w="70%" display={"flex"} mt="30px" gap="5px"  >
 <Box><p style={{"marginTop":"40px","color":`${theme.color}`,weight:`${theme.weight}`,lineHeight:`${theme.lineHeight}`,size:`${theme.size}`,fontFamily:`${theme.fontFamily}`,display:"inline"}} > Qty.</p></Box>
 <Box>
-<Select defaultValue={item.quantity} width="100%" >
+<Select onChange={(e)=>handlequantity(e,item._id)} defaultValue={item.quantity} width="100%" >
 
   <option value={1}>1</option>
   <option value={2}>2</option>
@@ -98,7 +124,7 @@ _hover={{transform:"scale(0.8)"}} borderRadius={"10px"} width="90%" height={"90%
 <Box mt="40px">
   <Box><p style={{"color":`${theme.color}`,weight:`${theme.weight}`,lineHeight:`${theme.lineHeight}`,size:`${theme.size}`,fontFamily:`${theme.fontFamily}`}} >Rs. {Math.ceil(Number(item["product-price"])-Number(item["product-price"])*(Number(item["product-discountPercentage"])/100))}</p>
   <strike  style={{"color":`${theme.color}`,weight:`${theme.weight}`,lineHeight:`${theme.lineHeight}`,size:`${theme.size}`,fontFamily:`${theme.fontFamily}`}} ><space>{item["product-price"]}</space></strike><span style={{"color":"#eb7e8c",weight:`${theme.weight}`,lineHeight:`${theme.lineHeight}`,size:`${theme.size}`,fontFamily:`${theme.fontFamily}`}} > {item["product-discountPercentage"]}%off</span></Box>
-  <Button  mt="5px" shadow={"rgba(230, 69, 69, 0.35) 0px 5px 15px"} color="red.300"><AiOutlineDelete/></Button>
+  <Button onClick={()=>handleclick(item._id)} mt="5px" shadow={"rgba(230, 69, 69, 0.35) 0px 5px 15px"} color="red.300"><AiOutlineDelete /></Button>
 </Box>
 </Box>):
 <Box>
@@ -108,7 +134,6 @@ _hover={{transform:"scale(0.8)"}} borderRadius={"10px"} width="90%" height={"90%
   }
 </>
 }
-
 
 
 

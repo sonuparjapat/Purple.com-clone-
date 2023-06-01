@@ -24,7 +24,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { singleproduct } from '../Reducer/SingleProduct/action';
 import NotFound from '../HomePagework/Notfound';
-import WithSubnavigation from '../Navbar';
+import WithSubnavigation from './Navbar';
 
   
   export default function SinglePrimer() {

@@ -12,7 +12,7 @@ export const signupfailed=(payload)=>{
 }
 const url=process.env.REACT_APP_Url
 export const usersignup=(obj)=>(dispatch)=>{
-    console.log(obj)
+    // console.log(obj)
     dispatch(signuprequest())
   return axios.post(`${url}/user/register`,obj)
     }

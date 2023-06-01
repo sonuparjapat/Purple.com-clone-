@@ -93,10 +93,10 @@ export default function FourthSlide() {
       
       {...settings} ref={(slider) => setSlider(slider)}>
         {cards.map((url, index) => (
-          <Box height={"400px"}>
+          <Box height={"400px"} key={index}>
 <Image
 
-key={index}
+
         
     
             backgroundPosition="center"

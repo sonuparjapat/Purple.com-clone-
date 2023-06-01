@@ -213,7 +213,7 @@ import {
         
         <GridItem
        w="100%"
-  
+       key={index}
           maxW="sm"
           borderWidth="1px"
           rounded="lg"

@@ -1,5 +1,5 @@
 import ProductAddToCart from "./ProductAddToCart"
-import WithSubnavigation from "../Navbar"
+import WithSubnavigation from "../Makeup/Navbar"
 import Carousel from "../slide"
 import Slider2 from "./secondslide"
 import ThirdSlide from "./Thirdslide"

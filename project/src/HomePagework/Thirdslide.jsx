@@ -5,7 +5,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import {Box,Image,Heading} from "@chakra-ui/react"
 import FourthSlide from './FourthSlide';
 import Step4 from './Step4';
-import Forslideruse from './ForSlider';
+// 
 const images=[
     {image:"https://media6.ppl-media.com/tr:w-512,ar-583-714,c-at_max,pr-true,dpr-2,f-gif/mediafiles/ecomm/misc/1677076373_min-30-live.gif"},
     {image:"https://media6.ppl-media.com/tr:w-512,ar-583-714,c-at_max,pr-true,dpr-2,f-gif/mediafiles/ecomm/misc/1677076364_125-live.gif"},

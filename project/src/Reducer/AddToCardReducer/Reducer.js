@@ -1,24 +1,19 @@
-import { signinfail, signinreq, signinsucc } from "./actionTypes"
-
-
-
+import { addtocardreq, addtocartfail, addtocartsucc } from "./ActionTypes"
 
 const initialdata={
-    data:[],
     isLoading:false,
-    isError:false,
-    
+    isError:false
 }
 export const reducer=(state=initialdata,action)=>{
     const {type,payload}=action
-    switch (type){
-        case signinreq:{
+    switch(type){
+        case addtocardreq:{
             return {...state,isLoading:true,isError:false}
         }
-        case signinsucc:{
-            return {...state,isLoading:false,isError:false,data:payload}
+        case addtocartsucc:{
+            return {...state,isLoading:false,isError:false}
         }
-        case signinfail:{
+        case addtocartfail:{
             return {...state,isLoading:false,isError:true}
         }
         default:{

@@ -46,7 +46,7 @@ const toast=useToast()
 const dispatch=useDispatch()
 const data=useSelector((state)=>state.signupreducer)
  const {isLoading,isError,isAuth,status}=data
- console.log(data)
+//  console.log(data)
  const navigate=useNavigate()
 //  console.log(status)
 // console.log(status)

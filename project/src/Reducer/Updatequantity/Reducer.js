@@ -1,28 +1,26 @@
-import { signinfail, signinreq, signinsucc } from "./actionTypes"
-
-
-
+import { updatequantityfail, updatequantityreq, updatequantitysucc } from "./ActionTypes"
 
 const initialdata={
-    data:[],
-    isLoading:false,
-    isError:false,
-    
+isLoading:false,
+isError:false
+
 }
+
 export const reducer=(state=initialdata,action)=>{
     const {type,payload}=action
     switch (type){
-        case signinreq:{
+        case updatequantityreq:{
             return {...state,isLoading:true,isError:false}
         }
-        case signinsucc:{
-            return {...state,isLoading:false,isError:false,data:payload}
+        case updatequantitysucc:{
+            return {...state,isLoading:false,isError:false}
         }
-        case signinfail:{
+        case updatequantityfail:{
             return {...state,isLoading:false,isError:true}
         }
         default:{
             return state
         }
     }
+
 }

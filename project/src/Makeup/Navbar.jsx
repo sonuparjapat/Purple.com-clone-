@@ -1,8 +1,8 @@
 import logo from "./myimg/shineugif.gif";
-import Carousel from "./slide";
+import Carousel from "../slide";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import { Link } from "react-router-dom";
-import { faArrowRightToBracket, faCartArrowDown, faColonSign, faHome, faLongArrowLeft, faSearch, faSign, faSignIn, faSmile } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightToBracket, faCartArrowDown, faColonSign, faHome, faLongArrowLeft, faSearch, faSign, faSignIn, faSignOut, faSmile } from "@fortawesome/free-solid-svg-icons";
 import {
     Box,
     Flex,
@@ -36,13 +36,13 @@ import {
 
 import { useState } from "react";
   import { useContext } from "react";
-  import { Authcontext } from "./AuthProvider.jsx/AuthProvider";
+  import { Authcontext } from "../AuthProvider.jsx/AuthProvider";
   export default function WithSubnavigation() {
     const { isOpen, onToggle } = useDisclosure();
 
   const{username,arrangeusername,inputvalue,ourinput}=useContext(Authcontext)
   // const{inputvalue}=useContext(Authcontext)
-  console.log(ourinput) 
+let data=localStorage.getItem("username")||"" 
     return (
       <Box>
         <Flex
@@ -94,15 +94,15 @@ import { useState } from "react";
           
           <Box w={{base:"40%",md:"9%",lg:"15%"}} ml={4}  display="flex" justifyContent="space-between">
             
-<Link to="/signup" style={{marginTop:"10px"}}><FontAwesomeIcon icon={faSignIn} /></Link>
+<Link to="/login" style={{marginTop:"10px"}}><FontAwesomeIcon icon={data?faSignOut:faSignIn} /></Link>
     <Link to="/cart" style={{marginTop:"10px"}}><FontAwesomeIcon icon={faCartArrowDown} /></Link>
     {/* <Link to="/favourate" style={{marginTop:"10px"}}><FontAwesomeIcon icon={faSmile} /></Link> */}
-    <Box borderRadius={5} bg="grey"><p style={{marginTop:"5px",color:"white"}}>Hi:{username?username:""}</p></Box>
+    <Box borderRadius={5} ><p style={{marginTop:"5px",color:"#ff00c6",fontWeight:"bold"}}>{data?data:"user:"}</p></Box>
   </Box>
         </Flex>
   
         <Collapse in={isOpen} animateOpacity>
-          <MobileNav />
+          {/* <MobileNav /> */}
         </Collapse>
         {/* <Carousel/> */}
       </Box>

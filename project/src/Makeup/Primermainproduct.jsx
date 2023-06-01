@@ -13,7 +13,8 @@
     GridItem,
     Heading,
     SimpleGrid,
-    Button
+    Button,
+    useToast
   } from '@chakra-ui/react';
   import { TfiFaceSad } from 'react-icons/tfi';
   import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
@@ -23,6 +24,8 @@
   import { useContext,useEffect,useState } from 'react';
 import LargeWithLogoCentered from '../HomePagework/Footer';
 import { useParams, useSearchParams,Link} from 'react-router-dom';
+import { useSelector,useDispatch } from "react-redux";
+import { addtocart } from "../Reducer/AddToCardReducer/Action";
   
   
   function Rating({ rating, numReviews }) {
@@ -56,6 +59,7 @@ import { useParams, useSearchParams,Link} from 'react-router-dom';
   
   function PrimermainProduct({products,handlepage,total}) {
 let maindata=products.data
+// console.log(maindata)
 
     const [searchParams,setSearchParams]=useSearchParams()
     const get=searchParams.getAll("productbrand")
@@ -129,15 +133,43 @@ const handleprice=(e)=>{
         window.removeEventListener('scroll', handleScroll);
       };
     }, []);
+ 
+let toast=useToast()
+
+const dispatch=useDispatch()
+const data=useSelector((state)=>state.addtocartreducer)
+
+    const handleaddtocart=(ratings,ratingcount,type,img,productbrand,productprice,productsizebutton,price,productdiscountpercentage,id,range,discountrange,quantity)=>{
+      // console.log(ratings,ratincount,discount,type,img,range,quantity,productbrand,productsizebutton,price,productdiscountpercentage,id,range)
+     let obj={
+
+        "ratings":ratings,
+    "ratingcount":ratingcount,
+    "type":type,
+    "img":img,
+    "productbrand":productbrand,
+    "product-price":productprice,
+    "product-sizeButton":productsizebutton,
+    "price":price,
+    "product-discountPercentage":productdiscountpercentage,
+    "id":id,
+    "range":range,
+    "discountrange":discountrange,
+    "quantity":quantity,}
+    // console.log(obj)
+      dispatch(addtocart(obj)).then((res)=>{
+        // console.log(res)
+        toast({"description":res.data.msg,"status":"success","position":"top"})
+      }).catch((er)=>{
+        // console.log(er)
+        toast({"description":er.response.data.msg,"status":"error","position":"top"})
+      })
+      
+    }
     return (
         <div style={{marginTop:"30px"}}>
           <Box  display={"flex"}  justifyContent={"space-between"} gap={"20px"}  >
-          {/* .boxScroll{
-    border: 0px solid black;
-    width: 50%;
-    overflow-x: hidden;
-    overflow-y: auto;
-} */}
+   
 
 <Box position={"sticky"} top="1" height="700px"   width={["45%","50%","20%","20%","20%","20%"]} >
 <heading  as="h6" fontWeight="light">Primer Items:-{typeof maindata!=="undefined"&&maindata.length}(per page)</heading>
@@ -240,12 +272,7 @@ const handleprice=(e)=>{
 </Box>
 </Box>
 </Box>
-{/* .boxScroll{
-    border: 0px solid black;
-    width: 50%;
-    overflow-x: hidden;
-    overflow-y: auto;
-} */}
+
       <Box    w="80%"  margin="auto">
         {typeof maindata!=="undefined"&&maindata.length!==0?
       <SimpleGrid columns={{base:"1",md:"2",lg:"4"}} spacingX='40px' spacingY='20px' >
@@ -253,7 +280,7 @@ const handleprice=(e)=>{
         
         <GridItem
        w="100%"
-   
+   key={index}
           maxW="sm"
           borderWidth="1px"
           rounded="lg"
@@ -271,23 +298,12 @@ const handleprice=(e)=>{
   
           <Link  to={`/primer/${el._id}`}><Image
  
-
-//  #image {
-//   position: relative;
-//   display: inline-block;
-//   transition: transform 0.3s ease;
-
-// }
-
-// #image:hover img {
-//   transform: scale(1.2);
-// }
 transition={"transform 1s ease "}
 _hover={{transform:"scale(0.8)"}}
           // height="200px"
           // width="100%"
             src={el.img}
-            alt={`Picture of ${el.typw}`}
+            alt={`Picture of ${el.type}`}
             roundedTop="lg"
           /></Link>
   
@@ -314,7 +330,22 @@ _hover={{transform:"scale(0.8)"}}
                 placement={'top'}
                 color={'gray.800'}
                 fontSize={'1.2em'}>
-                <chakra.a href={`/primer/${el.id}`} display={'flex'}>
+      {/* // "ratings":String,
+    // "ratingcount":String,
+    // "type":String,
+    // "img":String,
+    // "productbrand":String,
+    // "product-price":String,
+    // "product-sizeButton":String,
+    // "price":String,
+    // "product-discountPercentage":Number,
+    // "id":Number,
+    // "range":String,
+    // "discountrange":String,
+    // "quantity":Number, */}
+                <chakra.a onClick={()=>handleaddtocart(el.ratings,el.ratingcount
+,el.type,el.img,el.productbrand,el["product-price"],el["product-sizeButton"],el.price,
+                el["product-discountPercentage"],el.id,el.range,el.discountrange,el.quantity)} display={'flex'}>
                   <Icon as={FiShoppingCart} h={7} w={7} alignSelf={'center'} />
                 </chakra.a>
               </Tooltip>
@@ -353,7 +384,7 @@ _hover={{transform:"scale(0.8)"}}
        </Box>
       {/* <Slider2/> */}
       {arr.map((item,index)=>
-      <Button ml="5px" bg="gray.300" mt="30px" onClick={()=>handlepage(index+1)}>{index+1}</Button>)}
+      <Button  key={index} ml="5px" bg="gray.300" mt="30px" onClick={()=>handlepage(index+1)}>{index+1}</Button>)}
       <LargeWithLogoCentered/>
 
       </div>

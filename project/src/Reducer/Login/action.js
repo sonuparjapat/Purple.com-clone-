@@ -3,8 +3,8 @@ import axios from "axios"
 export const signinrequest=()=>{
     return {type:signinreq}
 }
-export const signinsucccess=()=>{
-    return {type:signinsucc}
+export const signinsucccess=(payload)=>{
+    return {type:signinsucc,payload}
 }
 export const signinfailed=()=>{
     return {type:signinfail}

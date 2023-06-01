@@ -67,6 +67,9 @@ import Slider2 from './secondslide';
 
   
   function Rating({ rating, numReviews }) {
+    // const handleaddtocart=()=>{
+    //   console.log("hi")
+    
     return (
       <Box display="flex" alignItems="center">
         {Array(5)
@@ -97,6 +100,9 @@ import Slider2 from './secondslide';
   function ProductAddToCart() {
     const{username,arrangeusername}=useContext(Authcontext)
     console.log(username)
+    const handleaddtocart=()=>{
+      console.log("hi")
+    }
     return (
         <div>
         <Heading as='h4' size='md' ml={4}>Featured</Heading>
@@ -105,7 +111,7 @@ import Slider2 from './secondslide';
         
         <GridItem
        w="100%"
-  
+       key={index}
           maxW="sm"
           borderWidth="1px"
           rounded="lg"
@@ -153,7 +159,7 @@ import Slider2 from './secondslide';
                 color={'gray.800'}
                 fontSize={'1.2em'}>
                 <chakra.a href={'#'} display={'flex'}>
-                  <Icon as={FiShoppingCart} h={7} w={7} alignSelf={'center'} />
+                  <Icon onClick={handleaddtocart} as={FiShoppingCart} h={7} w={7} alignSelf={'center'} />
                 </chakra.a>
               </Tooltip>
             </Flex>

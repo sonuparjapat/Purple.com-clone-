@@ -27,7 +27,7 @@ export default function Step7(){
         <div style={{marginTop:"30px"}}>
 <Grid w="98%" margin="auto" templateColumns={{base:"repeat(1,1fr)",lg:"repeat(2,1fr)"}}>
 {images.map((item,index)=>
-<GridItem >
+<GridItem key={index} >
 <Image src={item} />
 </GridItem>)}
 </Grid>

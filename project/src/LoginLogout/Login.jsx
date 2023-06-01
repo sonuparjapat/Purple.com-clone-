@@ -6,7 +6,7 @@ import {
     Input,
     Checkbox,
     Stack,
-    Link,
+ 
     Button,
     Heading,
     Text,
@@ -16,6 +16,7 @@ import {
     Spinner,
 
   } from '@chakra-ui/react';
+  import { Link } from 'react-router-dom';
   import { useNavigate } from 'react-router-dom';
   import { useReducer, useState } from 'react';
 import axios from 'axios';
@@ -47,8 +48,11 @@ const location=useLocation()
 const handlesubmit=(e)=>{
   e.preventDefault()
 dispatch(usersignin(login)).then((res)=>{
-  dispatch(signinsucccess())
+  dispatch(signinsucccess(res.data))
+  
   localStorage.setItem("usertoken",res.data.token)
+localStorage.setItem("username",res.data.username)
+  // localStorage.setItem("username",res.data)
   
   toast({"description":res.data.msg,"position":"top","status":"success"})
   navigate(location.state,{replace:true})
@@ -87,7 +91,7 @@ toast({"description":err.response.data.msg,"position":"top","status":"error"})
                 <FormLabel>Password</FormLabel>
                 <Input name="password" onChange={handlechange} type="password" />
               </FormControl>
-              <Stack spacing={10}>
+              <Stack mt="20px" spacing={10}>
               
 
 
@@ -115,7 +119,7 @@ toast({"description":err.response.data.msg,"position":"top","status":"error"})
                   _hover={{
                     bg: 'blue.500',
                   }}>
-                  Sign up
+                  Sign In
                 </Button>}
                 
               
@@ -123,6 +127,7 @@ toast({"description":err.response.data.msg,"position":"top","status":"error"})
 
 
               </Stack>
+              <Box mt="5px"><Link  to="/signup">Or SignUp?</Link></Box>
               </form>   </Stack>
           </Box>
         </Stack>

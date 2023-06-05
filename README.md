@@ -1,8 +1,29 @@
-# ShineU (Replica of purple.com)
+<h1>ShineU (Replica of purple.com)</h1>
+<h3>A full stack web project</h3>
 <h3>Objective</h3>
 <h5>The objective of creating this website was to utilize all the skills that we learned.</h5>
 WebsiteLink:-
-<h2>A full stack web project</h2>
+
+<h3>Tech Stack</h3>
+<h4>Frontend</h4>
+<ul>
+  <li>
+    React</li>
+  <li>Redux</li>
+  <li>ChakraUI</li>
+  <li>MaterialUI</li>
+  <li>HTML</li>
+  <li>CSS</li><li>JavaScript</li>
+  </ul>
+  
+  <h3>Backend</h3>
+  <ul>
+  <li>Node.js</li>
+   <li>Express</li>
+   <li>Mongodb</li>
+  </ul>
+  
+
 <h3>Features which are working or built:-</h3>
 
 <h4>

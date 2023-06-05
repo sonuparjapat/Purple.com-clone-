@@ -2,7 +2,7 @@
 <h3>A full stack web project</h3>
 <h3>Objective</h3>
 <h5>The objective of creating this website was to utilize all the skills that we learned.</h5>
-WebsiteLink:-
+WebsiteLink:-https://shineu.netlify.app/
 
 <h3>Tech Stack</h3>
 <h4>Frontend</h4>

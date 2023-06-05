@@ -1,8 +1,4 @@
 
- 
-  
-  
- 
 
   
   
@@ -24,8 +20,7 @@ import {
   GridItem,
   Heading,
   SimpleGrid,
-  useToast,
-
+  useToast
 
 } from '@chakra-ui/react';
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
@@ -48,40 +43,10 @@ import { addtocart } from '../Reducer/AddToCardReducer/Action';
   // "range":String,
   // "discountrange":String,
   // "quantity":Number, */}
-  function Rating({ rating, numReviews }) {
-    // const handleaddtocart=()=>{
-    //   console.log("hi")
-    
-    return (
-      <Box display="flex" alignItems="center">
-        {Array(5)
-          .fill('')
-          .map((_, i) => {
-            const roundedRating = Math.round(rating * 2) / 2;
-            if (roundedRating - i >= 1) {
-              return (
-                <BsStarFill
-                  key={i}
-                  style={{ marginLeft: '1' }}
-                  color={i < rating ? 'teal.500' : 'gray.300'}
-                />
-              );
-            }
-            if (roundedRating - i === 0.5) {
-              return <BsStarHalf key={i} style={{ marginLeft: '1' }} />;
-            }
-            return <BsStar key={i} style={{ marginLeft: '1' }} />;
-          })}
-        <Box as="span" ml="2" color="gray.600" fontSize="sm">
-          {numReviews} 
-        </Box>
-      </Box>
-    );
-  }
 const ourdata = [{
   "product-price":"299",
   "product-sizeButton":"30Ml",
-  productbrand:"NYKA",
+  productbrand:"Aroma",
   "product-discountPercentage":5,
   range:"200-300",
   discount:"5",
@@ -89,8 +54,8 @@ const ourdata = [{
 
   isNew: true,
   img:
-    'https://media6.ppl-media.com/tr:h-250,w-250,c-at_max/static/img/product/278196/ny-bae-loose-glitter-eyeshadow-diamond-red-14-2-g_6_display_1670391161_38f53279.jpg',
-  type: 'EYE Shaddow...',
+    'https://media6.ppl-media.com/tr:h-250,w-250,c-at_max,oi-AD_35x235_small_kJWM53nMn1.png,ow-60,ofo-top_right,dpr-2/static/img/product/335205/minimalist-8-percentage-glycolic-acid-face-toner-in-free-acid-form-with-bamboo-water-for-exfoliating-and-smoothening-skin_1_display_1667318344_d51d1f44.jpg',
+  type: 'SERUM...',
   price: "259",
   ratings: "4.2",
  ratingcount: "34",
@@ -105,8 +70,8 @@ const ourdata = [{
   quantity:1,
   isNew: true,
   img:
-    'https://media6.ppl-media.com/tr:h-250,w-250,c-at_max/static/img/product/300648/alps-goodness-glow-with-papaya-vitamin-c-and-ahas-night-cream-50g_13_display_1667478351_cf612032.jpg',
-  type: 'NightCream..',
+    'https://media6.ppl-media.com/tr:h-250,w-250,c-at_max/static/img/product/259394/alps-goodness-fenugreek-biotin-and-redensyl-anti-hairfall-conditioner-200-ml_15_display_1667570393_b24a4636.jpg',
+  type: 'Hair Conditionor..',
   price: "150",
   ratings:" 4.2",
   numReviews: 34,
@@ -115,15 +80,15 @@ const ourdata = [{
 {
   "product-price":"329",
   "product-sizeButton":"30Ml",
-  productbrand:"Faces Canada",
+  productbrand:"Nyka",
   "product-discountPercentage":5,
   range:"300-400",
   discount:"5",
   quantity:1,
   isNew: true,
   img:
-    'https://media6.ppl-media.com/tr:h-250,w-250,c-at_max/static/img/product/324200/faces-canada-comfy-matte-crayon-i-creamy-matte-i-chamomile-and-shea-butter-i-alcohol-free-i-on-fleek-06-2-8g_5_display_1672660038_e666f173.jpg',
-  type: 'Mattee Cryon...',
+    'https://media6.ppl-media.com/tr:h-250,w-250,c-at_max/static/img/product/274616/ny-bae-runway-radiance-compact-powder-pale-ivory-9gm-39_5_display_1670233057_4770815a.jpg',
+  type: 'Makeup powder...',
   price:"170",
   ratings:" 4.2",
   numReviews: 34,
@@ -132,15 +97,15 @@ const ourdata = [{
 {
   "product-price":"200",
   "product-sizeButton":"30Ml",
-  productbrand:"Faces Canada",
+  productbrand:"Wow",
   "product-discountPercentage":5,
   range:"200-300",
   discount:"5",
   quantity:1,
   isNew: true,
   img:
-    'https://media6.ppl-media.com/tr:h-250,w-250,c-at_max/static/img/product/315293/faces-canada-ultime-pro-splash-nail-enamel-rustini-60_7_display_1662449038_c207a8f0.jpg',
-  type: 'Nail Enamol...',
+    'https://media6.ppl-media.com/tr:h-250,w-250,c-at_max/static/img/product/250878/dermdoc-2-percentage-salicylic-acid-face-wash-for-oily-and-acne-prone-skin-type-120-ml_15_display_1667459442_d50a64f9.jpg',
+  type: 'Fash wash...',
   price: "400",
   ratings: "4.2",
   numReviews:" 34",
@@ -149,8 +114,39 @@ const ourdata = [{
 ];
 
 
-// >>>>>>>>>>>>>>>>>>>>>>>>>>>>
-function JustArrived() {
+
+function Rating({ rating, numReviews }) {
+  // const handleaddtocart=()=>{
+  //   console.log("hi")
+  
+  return (
+    <Box display="flex" alignItems="center">
+      {Array(5)
+        .fill('')
+        .map((_, i) => {
+          const roundedRating = Math.round(rating * 2) / 2;
+          if (roundedRating - i >= 1) {
+            return (
+              <BsStarFill
+                key={i}
+                style={{ marginLeft: '1' }}
+                color={i < rating ? 'teal.500' : 'gray.300'}
+              />
+            );
+          }
+          if (roundedRating - i === 0.5) {
+            return <BsStarHalf key={i} style={{ marginLeft: '1' }} />;
+          }
+          return <BsStar key={i} style={{ marginLeft: '1' }} />;
+        })}
+      <Box as="span" ml="2" color="gray.600" fontSize="sm">
+        {numReviews} 
+      </Box>
+    </Box>
+  );
+}
+
+function Bestsellors() {
   const dispatch=useDispatch()
   const toast=useToast()
 
@@ -297,4 +293,4 @@ _hover={{transform:"scale(0.8)"}}
   );
 }
 
-export default JustArrived
+export default Bestsellors

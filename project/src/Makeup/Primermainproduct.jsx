@@ -68,7 +68,7 @@ let maindata=products.data
     const [brand,setBrand]=useState(get||[])
     const getdiscount=searchParams.getAll("discountrange")
     const [discount,setDiscount]=useState(getdiscount||[])
-    console.log(get)
+    // console.log(get)
     const handlediscount=(e)=>{
       let value=e.target.value
       let newdiscount=[...discount]
@@ -115,7 +115,7 @@ const handleprice=(e)=>{
       }
       setSearchParams(params)
     },[brand,price,discount])
-    const{username,arrangeusername}=useContext(Authcontext)
+    // const{username,arrangeusername}=useContext(Authcontext)
     // console.log(discount)
 
     const [isFixed, setIsFixed] = useState(false);
@@ -138,32 +138,39 @@ let toast=useToast()
 
 const dispatch=useDispatch()
 const data=useSelector((state)=>state.addtocartreducer)
+const logindata=useSelector((state)=>state.loginreducer)
+const {username,token}=logindata
 
     const handleaddtocart=(ratings,ratingcount,type,img,productbrand,productprice,productsizebutton,price,productdiscountpercentage,id,range,discountrange,quantity)=>{
-      // console.log(ratings,ratincount,discount,type,img,range,quantity,productbrand,productsizebutton,price,productdiscountpercentage,id,range)
-     let obj={
+      if(token){
+        let obj={
 
-        "ratings":ratings,
-    "ratingcount":ratingcount,
-    "type":type,
-    "img":img,
-    "productbrand":productbrand,
-    "product-price":productprice,
-    "product-sizeButton":productsizebutton,
-    "price":price,
-    "product-discountPercentage":productdiscountpercentage,
-    "id":id,
-    "range":range,
-    "discountrange":discountrange,
-    "quantity":quantity,}
-    // console.log(obj)
-      dispatch(addtocart(obj)).then((res)=>{
-        // console.log(res)
-        toast({"description":res.data.msg,"status":"success","position":"top"})
-      }).catch((er)=>{
-        // console.log(er)
-        toast({"description":er.response.data.msg,"status":"error","position":"top"})
-      })
+          "ratings":ratings,
+      "ratingcount":ratingcount,
+      "type":type,
+      "img":img,
+      "productbrand":productbrand,
+      "product-price":productprice,
+      "product-sizeButton":productsizebutton,
+      "price":price,
+      "product-discountPercentage":productdiscountpercentage,
+      "id":id,
+      "range":range,
+      "discountrange":discountrange,
+      "quantity":quantity,}
+      // console.log(obj)
+        dispatch(addtocart(obj,token)).then((res)=>{
+          // console.log(res)
+          toast({"description":res.data.msg,"status":"success","position":"top"})
+        }).catch((er)=>{
+          // console.log(er)
+          toast({"description":er.response.data.msg,"status":"error","position":"top"})
+        })
+      }else{
+        toast({"description":"Please Login First","position":"top","status":"error"})
+      }
+      // console.log(ratings,ratincount,discount,type,img,range,quantity,productbrand,productsizebutton,price,productdiscountpercentage,id,range)
+     
       
     }
     return (

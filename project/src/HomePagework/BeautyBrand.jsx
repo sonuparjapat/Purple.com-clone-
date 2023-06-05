@@ -204,8 +204,8 @@ import {
   function BeautyBrand() {
     return (
         <div>
-      <Box mt="30px" ml="20px">
-    <Image src="https://media6.ppl-media.com/tr:w-1280,c-at_max,pr-true,dpr-2/mediafiles/ecomm/misc/1676638824_beauty-brand-web.jpg"/>
+      <Box w="100%" mt="30px" ml="20px">
+    <Image w="100%" src="https://media6.ppl-media.com/tr:w-1280,c-at_max,pr-true,dpr-2/mediafiles/ecomm/misc/1676638824_beauty-brand-web.jpg"/>
     
     </Box>
       <Grid mt="30px" ml="20px" templateColumns={{base:'repeat(1, 1fr)',md:"repeat(2,1fr)",lg:"repeat(4,1fr)"}} gap={3}>
@@ -237,18 +237,19 @@ import {
         )}
         
       </Grid>
-      <Box mt="30px" ml="30px">
+      <Box w="80%" margin="auto">
+      <Box  mt="30px">
         <Image src="https://media6.ppl-media.com/tr:w-1280,c-at_max,pr-true,dpr-2,f-gif/mediafiles/ecomm/misc/1676640075_disocver-web-.gif"/>
 
       </Box>
-      <Box mt="30px" ml="30px">
+      <Box mt="30px" >
         <Image src="https://media6.ppl-media.com/tr:w-1280,c-at_max,pr-true,dpr-2/mediafiles/ecomm/misc/1639028230_alert-strip-web.jpg"/>
 
       </Box>
-      <Box  mt="90px" ml="50px">
-        <Image ml="30px" src="https://media6.ppl-media.com/tr:w-1280,c-at_max,pr-true,dpr-2/mediafiles/ecomm/misc/1662556480_benefit-icons-strip-web.jpg"/>
+      <Box  mt="90px" >
+        <Image src="https://media6.ppl-media.com/tr:w-1280,c-at_max,pr-true,dpr-2/mediafiles/ecomm/misc/1662556480_benefit-icons-strip-web.jpg"/>
 
-      </Box>
+      </Box></Box>
       </div>
     );
   }

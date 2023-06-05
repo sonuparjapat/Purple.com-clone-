@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import WithSubnavigation from './Navbar'
 import LargeWithLogoCentered from '../HomePagework/Footer'
-import {Box,Heading,Image,Select,Button,Spacer,space, Spinner} from "@chakra-ui/react"
+import {Box,Heading,Image,Button,Spacer,space, Spinner, useToast, SelectField} from "@chakra-ui/react"
+
 import { Link } from 'react-router-dom'
 
 import { AiOutlineDelete,AiFillLock } from "react-icons/ai";
@@ -36,24 +37,30 @@ const data1={
 }
 export default function Cartpage() {
 const [cartdata,setCartdata]=useState(data1)
+const [paymentmethod,setPaymentmethod]=useState(false)
+const [online,setOnline]=useState(false)
+
 const [shippingcharge,setShippingcharges]=useState(50)
 const [state,setState]=useState(false)
 const dispatch=useDispatch()
 const cart=useSelector((state)=>state.cartdatareducer)
-
+const logindata=useSelector((state)=>state.loginreducer)
+const {username,token}=logindata
 useEffect(()=>{
-dispatch(usercarddata)
+dispatch(usercarddata(token))
 },[state])
 const {isLoading,isError,data,sum,sumafterdiscount,savings}=cart
+
 // useEffect(()=>{
 //   setCartdata(data)
 // },[])
-
+const toast=useToast()
 const handleclick=(id)=>{
-dispatch(deletedata(id)).then((res)=>{
-  console.log(res)
+dispatch(deletedata(id,token&&token)).then((res)=>{
+  // console.log(res)
 
   dispatch(deletesuccess())
+  toast({description:"Item Removed","status":"success","position":"top"})
   setState(!state)
  
 }).catch((err)=>{
@@ -65,7 +72,7 @@ dispatch(deletedata(id)).then((res)=>{
 const handlequantity=(e,id)=>{
 let value=e.target.value
 // console.log(value,id)
-dispatch(updatedata(value,id))
+dispatch(updatedata(value,id,token&&token))
 setTimeout(()=>{
   setState(!state)
 },1000)
@@ -109,20 +116,20 @@ _hover={{transform:"scale(0.8)"}} borderRadius={"10px"} width="90%" height={"90%
 <Box w="70%" display={"flex"} mt="30px" gap="5px"  >
 <Box><p style={{"marginTop":"40px","color":`${theme.color}`,weight:`${theme.weight}`,lineHeight:`${theme.lineHeight}`,size:`${theme.size}`,fontFamily:`${theme.fontFamily}`,display:"inline"}} > Qty.</p></Box>
 <Box>
-<Select onChange={(e)=>handlequantity(e,item._id)} defaultValue={item.quantity} width="100%" >
+<SelectField onChange={(e)=>handlequantity(e,item._id,token)}  value={item.quantity} width="100%" >
 
   <option value={1}>1</option>
   <option value={2}>2</option>
   <option value={3}>3</option>
   <option value={4}>4</option>
   <option value={5}>5</option>
-</Select></Box></Box>
+</SelectField></Box></Box>
 <hr></hr>
 
 </Box>
 
 <Box mt="40px">
-  <Box><p style={{"color":`${theme.color}`,weight:`${theme.weight}`,lineHeight:`${theme.lineHeight}`,size:`${theme.size}`,fontFamily:`${theme.fontFamily}`}} >Rs. {Math.ceil(Number(item["product-price"])-Number(item["product-price"])*(Number(item["product-discountPercentage"])/100))}</p>
+  <Box><p style={{"color":`${theme.color}`,weight:`${theme.weight}`,lineHeight:`${theme.lineHeight}`,size:`${theme.size}`,fontFamily:`${theme.fontFamily}`}} >Rs. {Math.ceil(Number(item["product-price"])*Number(item.quantity)-(Number(item["product-price"])*Number(item.quantity))*(Number(item["product-discountPercentage"])/100))}</p>
   <strike  style={{"color":`${theme.color}`,weight:`${theme.weight}`,lineHeight:`${theme.lineHeight}`,size:`${theme.size}`,fontFamily:`${theme.fontFamily}`}} ><space>{item["product-price"]}</space></strike><span style={{"color":"#eb7e8c",weight:`${theme.weight}`,lineHeight:`${theme.lineHeight}`,size:`${theme.size}`,fontFamily:`${theme.fontFamily}`}} > {item["product-discountPercentage"]}%off</span></Box>
   <Button onClick={()=>handleclick(item._id)} mt="5px" shadow={"rgba(230, 69, 69, 0.35) 0px 5px 15px"} color="red.300"><AiOutlineDelete /></Button>
 </Box>
@@ -215,7 +222,11 @@ _hover={{transform:"scale(0.8)"}} borderRadius={"10px"} width="90%" height={"90%
 
 
   </Box>
- <Link to="/payment" > <Button display="block" bg="pink.400" _hover={{bg:"pink.500"}} color="white" margin="auto" mt="50px" width="90%" >Place Order</Button></Link>
+ <Button onClick={()=>setPaymentmethod(!paymentmethod)} display="block" bg="pink.400" _hover={{bg:"pink.500"}} color="white" margin="auto" mt="50px" width="90%" isDisabled={sum==0?true:false}>Place Order</Button>
+ <Link to="/checkout"><Button display={paymentmethod==false?"none":"block"} bg="green.400" _hover={{bg:"green.500"}} color="white" margin="auto" mt="10px" width="90%" isDisabled={sum==0?true:false}>By Online Payment</Button></Link>
+
+ <Link to="/cashondelivery"><Button  display={paymentmethod==false?"none":"block"} bg="green.400" _hover={{bg:"green.500"}} color="white" margin="auto" mt="10px" width="90%" isDisabled={sum==0?true:false}>Cash On Delivery</Button></Link>
+ 
  <Link to="/primer"><Heading  fontWeight="light" theme mt="30px">or? Shopping More</Heading></Link>
   </Box>
 </Box>

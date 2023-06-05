@@ -1,10 +1,10 @@
 
 import {Grid,GridItem,Image,Box} from "@chakra-ui/react"
 import FourthSlide from "./FourthSlide"
-import ProductAddToCart from "./ProductAddToCart"
+import ProductAddToCart from "./FeaturedProducts"
 import Category from "./Category"
 import Step5 from "./step5"
-import Step6 from "./Step6"
+import Step6 from "./BestSellors"
 import JustArrived from "./JustArrived"
 const images=[
     "https://media6.ppl-media.com/tr:dpr-2/mediafiles/ecomm/misc/1676890678_ezgif-4-1a9a710bf8.gif?tr=f-gif",

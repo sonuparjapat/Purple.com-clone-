@@ -96,7 +96,8 @@ import {
           shadow="lg"
           position="relative">
         
-          <img
+          <Image
+          w="100%"
           height="200px"
           width="100%"
             src={data.imageURL}

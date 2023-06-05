@@ -13,13 +13,13 @@ export const addtocartfailure=()=>{
 }
 
 
-export const addtocart=(obj)=>(dispatch)=>{
+export const addtocart=(obj,token)=>(dispatch)=>{
     // console.log(obj)
     dispatch(addtocartrequest())
-    const usertoken=localStorage.getItem("usertoken")
+    // const usertoken=localStorage.getItem("usertoken")
     return axios.post(`${process.env.REACT_APP_Url}/userdata/post`,obj,{
         headers:{
-            "Authorization":`Bearer ${usertoken}`
+            "Authorization":`Bearer ${token}`
         }
     })
 }

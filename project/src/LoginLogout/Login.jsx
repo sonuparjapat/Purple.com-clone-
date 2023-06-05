@@ -27,6 +27,7 @@ import { Authcontext } from '../AuthProvider.jsx/AuthProvider';
 import Logout from './Logout';
 import { signinfailed, signinsucccess, usersignin } from '../Reducer/Login/action';
 import { useDispatch,useSelector } from 'react-redux';
+import SimpleNav from '../HomePagework/SimpleNav';
 const initdata={
 "email":"",
 "password":"",
@@ -49,9 +50,9 @@ const handlesubmit=(e)=>{
   e.preventDefault()
 dispatch(usersignin(login)).then((res)=>{
   dispatch(signinsucccess(res.data))
-  
-  localStorage.setItem("usertoken",res.data.token)
-localStorage.setItem("username",res.data.username)
+  // console.log(res.data)
+//   localStorage.setItem("usertoken",res.data.token)
+// localStorage.setItem("username",res.data.username)
   // localStorage.setItem("username",res.data)
   
   toast({"description":res.data.msg,"position":"top","status":"success"})
@@ -63,6 +64,8 @@ toast({"description":err.response.data.msg,"position":"top","status":"error"})
 }
 // console.log(login)
     return (
+      <>
+      <SimpleNav/>
       <Flex
         minH={'100vh'}
         align={'center'}
@@ -132,5 +135,6 @@ toast({"description":err.response.data.msg,"position":"top","status":"error"})
           </Box>
         </Stack>
       </Flex>
+      </>
     );
   }

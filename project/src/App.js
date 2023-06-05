@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 
-import ProductAddToCart from './HomePagework/ProductAddToCart';
+
 import Slider2 from './HomePagework/secondslide';
 // import Creatingslide from './Creatingslide';
 import ThirdSlide from './HomePagework/Thirdslide';

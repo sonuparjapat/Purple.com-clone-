@@ -1,5 +1,5 @@
 import logo from "./myimg/shineugif.gif";
-import Carousel from "../slide";
+
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import { Link } from "react-router-dom";
 import { faArrowRightToBracket, faCartArrowDown, faColonSign, faHome, faLongArrowLeft, faSearch, faSign, faSignIn, faSignOut, faSmile } from "@fortawesome/free-solid-svg-icons";
@@ -37,14 +37,18 @@ import {
 import { useState } from "react";
   import { useContext } from "react";
   import { Authcontext } from "../AuthProvider.jsx/AuthProvider";
+import { useSelector } from "react-redux";
+import { BiLogOutCircle } from "react-icons/bi";
   export default function WithSubnavigation() {
     const { isOpen, onToggle } = useDisclosure();
 
-  const{username,arrangeusername,inputvalue,ourinput}=useContext(Authcontext)
+  // const{username,arrangeusername,inputvalue,ourinput}=useContext(Authcontext)
+  const logindata=useSelector((state)=>state.loginreducer)
+  const {username,token}=logindata
   // const{inputvalue}=useContext(Authcontext)
-let data=localStorage.getItem("username")||"" 
+
     return (
-      <Box>
+      <Box width="100&">
         <Flex
           bg={useColorModeValue('white', 'gray.800')}
           color={useColorModeValue('gray.600', 'white')}
@@ -90,19 +94,19 @@ let data=localStorage.getItem("username")||""
           <Box  mr={{base:"20px",md:"20px",lg:"50"}} display="flex" marginLeft={{base:"5px"}} w={{base:"50%",md:"20%",lg:"33%"}}>
             <Box  w={{md:"95%"}} >
        
-          <Input onChange={(e)=>inputvalue(e.target.value)} marginRight="30px" variant='outline' placeholder='Search Items' w="99%"/></Box><Box><Button  opacity="0.5"><FontAwesomeIcon icon={faSearch} /></Button></Box>  </Box>
+          <Input  marginRight="30px" variant='outline' placeholder='Search Items' w="99%"/></Box><Box><Button  opacity="0.5"><FontAwesomeIcon icon={faSearch} /></Button></Box>  </Box>
           
           <Box w={{base:"40%",md:"9%",lg:"15%"}} ml={4}  display="flex" justifyContent="space-between">
             
-<Link to="/login" style={{marginTop:"10px"}}><FontAwesomeIcon icon={data?faSignOut:faSignIn} /></Link>
+<Link to="/login" style={{marginTop:"10px"}}><FontAwesomeIcon _hover={{color:username?"red":""}} icon={username?faSignOut:faSignIn} /></Link>
     <Link to="/cart" style={{marginTop:"10px"}}><FontAwesomeIcon icon={faCartArrowDown} /></Link>
     {/* <Link to="/favourate" style={{marginTop:"10px"}}><FontAwesomeIcon icon={faSmile} /></Link> */}
-    <Box borderRadius={5} ><p style={{marginTop:"5px",color:"#ff00c6",fontWeight:"bold"}}>{data?data:"user:"}</p></Box>
+    <Box borderRadius={5} ><p style={{marginTop:"5px",color:"#ff00c6",fontWeight:"bold"}}>{username?username:"user:"}</p></Box>
   </Box>
         </Flex>
   
         <Collapse in={isOpen} animateOpacity>
-          {/* <MobileNav /> */}
+          <MobileNav />
         </Collapse>
         {/* <Carousel/> */}
       </Box>
@@ -204,15 +208,14 @@ let data=localStorage.getItem("username")||""
     );
   };
   
-  const MobileNavItem = ({ label, children, href }) => {
+  const MobileNavItem = ({ label, children,href }) => {
     const { isOpen, onToggle } = useDisclosure();
   
     return (
       <Stack spacing={4} onClick={children && onToggle}>
-        <Flex
+      <Link to={href}><Flex
           py={2}
-          as={Link}
-          href={href ?? "/primer"}
+         
           justify={'space-between'}
           align={'center'}
           _hover={{
@@ -232,7 +235,7 @@ let data=localStorage.getItem("username")||""
               h={6}
             />
           )}
-        </Flex>
+        </Flex></Link>
   
         <Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
           <Stack
@@ -244,7 +247,7 @@ let data=localStorage.getItem("username")||""
             align={'start'}>
             {children &&
               children.map((child) => (
-                <Link key={child.label} py={2} href={child.href}>
+                <Link key={child.label} py={2} to={child.href}>
                   {child.label}
                 </Link>
               ))}
@@ -269,7 +272,7 @@ let data=localStorage.getItem("username")||""
         {
           label: 'Concealer',
           subLabel: 'Try this once',
-          href: '/concealer',
+          href: '/Primer',
         },
       ],
     },
@@ -279,21 +282,21 @@ let data=localStorage.getItem("username")||""
         {
           label: 'Face Wash',
           subLabel: 'Get a Glow',
-          href: '/facewash',
+          href: '/primer',
         },
         {
           label: 'Cleanser',
           subLabel: 'Make your skin happy',
-          href: '/cleanser',
+          href: '/primer',
         },
       ],
     },
     {
       label: 'Personal Care',
-      href: '/personalcare',
+      href: '/primer',
     },
     {
       label: 'Men',
-      href: '/men',
+      href: '/primer',
     },
   ];

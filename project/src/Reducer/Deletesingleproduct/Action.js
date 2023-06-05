@@ -11,7 +11,7 @@ export const deletesuccess=()=>{
 }
 
 
-export const deletedata=(id)=>(disppatch)=>{
+export const deletedata=(id,token)=>(disppatch)=>{
     disppatch(deleterequest())
     // console.log(id)
     const usertoken=localStorage.getItem("usertoken")
@@ -20,7 +20,7 @@ export const deletedata=(id)=>(disppatch)=>{
         "method":"DELETE",
    headers:{
     "Content-Type":"application/json",
-    "Authorization":`Bearer ${usertoken}`
+    "Authorization":`Bearer ${token}`
    },
 
    

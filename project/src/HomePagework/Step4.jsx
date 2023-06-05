@@ -1,10 +1,10 @@
 
 import {Grid,GridItem,Image,Box} from "@chakra-ui/react"
 import FourthSlide from "./FourthSlide"
-import ProductAddToCart from "./ProductAddToCart"
+import ProductAddToCart from "./FeaturedProducts"
 import Category from "./Category"
 import Step5 from "./step5"
-import Step6 from "./Step6"
+import Step6 from "./BestSellors"
 import JustArrived from "./JustArrived"
 import Step7 from "./Step7"
 import BeautyBrand from "./BeautyBrand"
@@ -28,7 +28,7 @@ export default function Step4(){
 
     return (
         <div>
-<Grid w="98%" margin="auto" templateColumns={{base:"repeat(1,1fr)",lg:"repeat(2,1fr)"}}>
+<Grid w="98%" margin="auto" templateColumns={{base:"repeat(1,1fr)",lg:"repeat(2,1fr)"}} marginTop={"50px"}>
 {images.map((item,index)=>
 <GridItem key={index} >
 <Image src={item} />

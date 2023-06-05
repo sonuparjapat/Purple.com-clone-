@@ -13,7 +13,7 @@ const location=useLocation()
 const dispatch=useDispatch()
 const data=useSelector((state)=>state.primerproduct)
 const [searchParams]=useSearchParams()
-console.log(searchParams.getAll("product-brand"))
+// console.log(searchParams.getAll("product-brand"))
 const {isLoading,isError,products}=data
 // console.log(products)
 // console.log(products)

@@ -1,23 +1,25 @@
-import ProductAddToCart from "./ProductAddToCart"
+
 import WithSubnavigation from "../Makeup/Navbar"
-import Carousel from "../slide"
+import HomepageCarousel from "./Carousel"
 import Slider2 from "./secondslide"
 import ThirdSlide from "./Thirdslide"
 import FourthSlide from "./FourthSlide"
 import Step4 from "./Step4"
-import Category from "./Category"
+import Bestsellors from "./Category"
 import Step5 from "./step5"
-import Step6 from "./Step6"
+import Step6 from "./BestSellors"
 import Step7 from "./Step7"
 import JustArrived from "./JustArrived"
 import BeautyBrand from "./BeautyBrand"
 import LargeWithAppLinksAndSocial from "./Footer"
+import FeaturedProducts from "./FeaturedProducts"
+import Category from "./Category"
 export default function Main(){
     return (
 <>
 <WithSubnavigation/>
-<Carousel/>
-<ProductAddToCart/>
+<HomepageCarousel/>
+<FeaturedProducts/>
 <Slider2/>
 <ThirdSlide/>
 <FourthSlide/>

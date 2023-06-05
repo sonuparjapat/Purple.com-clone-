@@ -33,6 +33,7 @@ import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signinfail } from '../Reducer/Login/actionTypes';
 import { signinfailed, signinsucccess } from '../Reducer/Login/action';
+import SimpleNav from '../HomePagework/SimpleNav';
 const initdata={
   "name":"",
   "email":"",
@@ -59,8 +60,7 @@ const handlechange=(e)=>{
 
 const handlesubmit=(e)=>{
   e.preventDefault()
-  // console.log(signup
-  //   )
+
   const {name,email,password}=signup
   if(name&&email&&password){
   
@@ -89,7 +89,7 @@ console.log(isLoading)
       <>
 
       
-      
+      <SimpleNav/>
       
       
     

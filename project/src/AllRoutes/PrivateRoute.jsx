@@ -5,7 +5,8 @@ const data=useSelector((state)=>state.signupreducer)
 const{isAuth}=data
 
 const location=useLocation()
-let token=localStorage.getItem("usertoken")||""
+const logindata=useSelector((state)=>state.loginreducer)
+const {token}=logindata
 if(token==false){
     return <Navigate to="/login" state={location.pathname}  replace/>
 }

@@ -15,6 +15,7 @@ import {
     VisuallyHidden,
     List,
     ListItem,
+    useToast
   } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import LargeWithLogoCentered from '../HomePagework/Footer';
@@ -25,6 +26,7 @@ import { useParams } from 'react-router-dom';
 import { singleproduct } from '../Reducer/SingleProduct/action';
 import NotFound from '../HomePagework/Notfound';
 import WithSubnavigation from './Navbar';
+import { addtocart } from '../Reducer/AddToCardReducer/Action';
 
   
   export default function SinglePrimer() {
@@ -38,13 +40,49 @@ dispatch(singleproduct(id))
 
 
 },[])
+const toast=useToast()
+const logindata=useSelector((state)=>state.loginreducer)
+const {token}=logindata
+const handleaddtocart=(ratings,ratingcount,type,img,productbrand,productprice,productsizebutton,price,productdiscountpercentage,id,range,discountrange,quantity)=>{
+  // console.log(ratings,ratincount,discount,type,img,range,quantity,productbrand,productsizebutton,price,productdiscountpercentage,id,range)
+  if(token){
+    let obj={
+
+      "ratings":ratings,
+  "ratingcount":ratingcount,
+  "type":type,
+  "img":img,
+  "productbrand":productbrand,
+  "product-price":productprice,
+  "product-sizeButton":productsizebutton,
+  "price":price,
+  "product-discountPercentage":productdiscountpercentage,
+  "id":id,
+  "range":range,
+  "discountrange":discountrange,
+  "quantity":quantity,}
+  // console.log(obj)
+    dispatch(addtocart(obj,token)).then((res)=>{
+      // console.log(res)
+      toast({"description":res.data.msg,"status":"success","position":"top"})
+    }).catch((er)=>{
+      // console.log(er)
+      toast({"description":er.response.data.msg,"status":"error","position":"top"})
+    })
+  }else{
+    toast({description:"Please Login First","position":"top",status:"error"})
+  }
+ 
+  
+
+}
 const {isLoading,isError,data}=singledata
 let maindata=data.data
 if(isLoading==true){
     return <h1>Loading....</h1>
 }
 
-
+console.log(maindata)
     return (
         <>
 <WithSubnavigation/>
@@ -198,7 +236,22 @@ if(isLoading==true){
               </Box>
             </Stack>
   
+            {/* "ratings":ratings,
+"ratingcount":ratingcount,
+"type":type,
+"img":img,
+"productbrand":productbrand,
+"product-price":productprice,
+"product-sizeButton":productsizebutton,
+"price":price,
+"product-discountPercentage":productdiscountpercentage,
+"id":id,
+"range":range,
+"discountrange":discountrange,
+"quantity":quantity,} */}
             <Button
+            onClick={()=>handleaddtocart(maindata.ratings,maindata.ratingcount,maindata.type,maindata.img,maindata.productbrand,maindata["product-price"],maindata["product-sizeButton"],maindata.price,
+            maindata["product-discountPercentage"],maindata.id,maindata.range,maindata.discountrange,maindata.quantity)}
               rounded={'none'}
               w={'full'}
               mt={8}

@@ -12,15 +12,15 @@ export const cartdatafailure=()=>{
 }
 
 
-export const usercarddata=(dispatch)=>{
+export const usercarddata=(token)=>(dispatch)=>{
     dispatch(cartdatarequest())
-    const usertoken=localStorage.getItem("usertoken")
+    // const usertoken=localStorage.getItem("usertoken")
     axios.get(`${process.env.REACT_APP_Url}/userdata/userproduct`,{
         headers:{
-            "Authorization":`Bearer ${usertoken}`
+            "Authorization":`Bearer ${token}`
         }
     }).then((res)=>{
-        console.log(res.data)
+
         dispatch(cartdatasuccess(res.data))
     }).catch((err)=>dispatch(cartdatafailure()))
 }

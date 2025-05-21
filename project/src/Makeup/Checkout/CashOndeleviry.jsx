@@ -29,11 +29,7 @@ export default function CashOnDelivery() {
     const {firstName,lastName,city,zip,country,address1}=data
 const [checked,setChecked]=useState(false)
 
-
-
-   
-  
-    const handlechange=(e)=>{
+   const handlechange=(e)=>{
         const {name,value}=e.target
         setData((pre)=>({...pre,[name]:value}))
     }
@@ -161,7 +157,7 @@ const [check,setCheck]=useState(false)
           /> */}
         </Grid>
       </Grid>
-      <Button onClick={handleorder}  disabled={firstName&&lastName&&address1&&zip&&country&&city?false:true}>PlaceOrder</Button>
+      <Button   disabled={firstName&&lastName&&address1&&zip&&country&&city?false:true}>PlaceOrder</Button>
    
     </React.Fragment>
    
